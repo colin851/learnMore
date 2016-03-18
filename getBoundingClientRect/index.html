@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+		<title></title>
+		<style>
+		body{
+			margin: 0;
+			padding: 0;
+		}
+			#box {
+				width: 200px;
+				height: 200px;
+				background: #A52A2A;
+				margin: 0 auto;
+				/*margin-top: -100px;*/
+				/*margin-top: 200px;
+				margin-bottom: 200px;*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<p><br></p>
+		<p><br></p>
+		<p><br></p>
+		<p><br></p>
+		<div id="box"></div>
+		<p><br></p>
+		<p><br></p>
+		<p><br></p>
+		<p><br></p>
+		<p><br></p>
+		<p><br></p>
+		<p><br></p>
+		<p><br></p>
+
+		<script>
+		$(window).on("scroll",function(){
+			//console.log(document.documentElement.scrollTop);//火狐滚动值变动，chrome始终终为0
+			//console.log(document.body.scrollTop);//火狐始终终为0，chrome滚动值变动
+			
+			
+			//console.log($("body").scrollTop());//火狐始终终为0，chrome滚动值变动
+			//console.log($(window).scrollTop());//火狐、chrome都变化
+		})
+			document.getElementById('box').onclick = function() {
+				if (document.documentElement.getBoundingClientRect) {
+					console.log("left:" + this.getBoundingClientRect().left)
+					console.log("top:" + this.getBoundingClientRect().top)
+					console.log("right:" + this.getBoundingClientRect().right)
+					console.log("bottom:" + this.getBoundingClientRect().bottom)
+					var X = this.getBoundingClientRect().left + document.documentElement.scrollLeft;
+					var Y = this.getBoundingClientRect().top + document.documentElement.scrollTop;
+					console.log("Demo的位置是X:" + X + ";Y:" + Y)
+				}
+			}
+		</script>
+	</body>
+
+</html>

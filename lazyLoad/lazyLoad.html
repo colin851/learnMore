@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<link rel="stylesheet" href="../css/reset.css" />
+		<!--<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>-->
+		<script type="text/javascript" src="../js/jquery.js" ></script>
+		<title></title>
+		<style>
+		body{
+			background: white;
+		}
+			ul,li,img{
+				width: 100%;
+			}
+			img{
+				margin-bottom: 10px;
+			}
+			li{
+				padding: 10px;
+			}
+			.img{
+				transition: all 0.2s linear;
+				-webkit-transition: all 0.2s linear;	
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li><img class="img" data-src="../img/wallpaper-161589.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-197304.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-254477.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-2669079.png" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-336167.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-379108.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-445385.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-54773.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-161589.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-197304.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-254477.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-2669079.png" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-336167.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-379108.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-445385.jpg" src="../img/loading.jpg" /></li>
+			<li><img class="img" data-src="../img/wallpaper-54773.jpg" src="../img/loading.jpg" /></li>
+		</ul>
+		<script>
+//			alert($(".img").eq(5).offset().top)
+
+//			获取页面可视高度和滚动距离
+			var innerheight = window.innerHeight;
+//			alert(innerheight)
+//			var scrollHeight = document.body.scrollTop;
+//			var scrollHeight1 = document.documentElement.scrollTop;
+			var scrollHeight = $(document).scrollTop();
+//			alert(scrollHeight)
+//			alert(scrollHeight)
+//			获取某一个元素到最外层(html)顶点的位置,兼容ie方法
+//			function offSetTop(element){
+//				var top = element.offset().top;
+////				alert(top)
+//				return top;	
+//			}
+			
+			
+			
+			var imgSrc = $('.img');
+			imgSrc.css({
+				'opacity':0
+			})
+//			var top1 = imgSrc.eq(0).offset().top;
+//			alert(top1)
+//			console.log(imgSrc.length)
+			$(window).on("scroll",function(){
+				setTimeout(function(){//setTimeout解决窗口滚动时多长连续的执行
+					for(var i=0;i<imgSrc.length;i++){
+						var top1 = imgSrc.eq(i).offset().top;
+						var height1 = innerheight+scrollHeight
+						var src = imgSrc.eq(i).attr('data-src');
+//						console.log(innerheight+scrollHeight>=top);
+						var scrollHeight = $('body').scrollTop();
+						console.log(scrollHeight);
+						console.log(innerheight+scrollHeight);
+						console.log(top1);
+						if(innerheight+scrollHeight>=top1	){
+							imgSrc.eq(i).attr('src',src).css({'opacity':1});
+						}
+						
+					}
+				},100);
+//				alert()
+			})
+		</script>
+	</body>
+</html>

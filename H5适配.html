@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../../Content/style.css" type="text/css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/H5.css" />
+		<script src="../../Scripts/jquery-1.10.2.js"></script>
+		<title>家装节</title>
+	</head>
+
+	<body>
+		<div class="page1">
+			<div class="tittle-box">
+				<img class="animated" src="../../img/youhui2.png" />
+			</div>
+			<div class="brand-wall">
+				<div class="tag-cloud">
+					<a href="javascript:void()">TOTO</a>
+					<a href="javascript:void()">玉兰</a>
+					<a href="javascript:void()">老板电器</a>
+					<a href="javascript:void()">德贝</a>
+					<a href="javascript:void()">巨桑</a>
+					<a href="javascript:void()">斯宝亚创</a>
+					<a href="javascript:void()">欧派</a>
+					<a href="javascript:void()">欧普</a>
+					<a href="javascript:void()">兔宝宝</a>
+					<a href="javascript:void()">苏泊尔</a>
+					<a href="javascript:void()">圣象</a>
+					<a href="javascript:void()">喜临门</a>
+					<a href="javascript:void()">世界之窗</a>
+					<a href="javascript:void()">华帝</a>
+					<a href="javascript:void()">帝王洁具</a>
+					<a href="javascript:void()">友邦</a>
+					<a href="javascript:void()">金迪</a>
+					<a href="javascript:void()">方太</a>
+				</div>
+			</div>
+			<div class="button">
+				<div class="gundong">
+					<img class="line-white" src="../../img/gundong.png" />
+					<div id="scrollDiv" class="scroll-div">
+						<div class="items">
+							<p class="item">第一行</p>
+							<p class="item">第二行</p>
+						</div>
+					</div>
+				</div>
+				<img id="qianDao" src="../../img/button.png">
+			</div>
+			<div class="sign-bottom">
+				<img src="../../img/down.png" />
+			</div>
+		</div>
+		<script type="text/javascript" src="../../Scripts/tagCloud.js"></script>
+		<script>
+			$(".tag-cloud").tagCloud({
+				radius: (100)
+			});
+
+			function AutoScroll(obj) {
+				$(obj).find(".items").animate({
+					marginTop: "-30px"
+				}, 500, function() {
+					$(this).css({
+						marginTop: "0px"
+					}).find(".item").first().appendTo(this);
+				});
+			}
+			setInterval(function() {
+				AutoScroll("#scrollDiv");
+			}, 3000);
+			
+			function reset(){
+				var width = $(window).width();
+ 				var height = $(window).height();
+				var scale = 1;
+				var vScale = width/320;
+				var hScale = height/568;
+			    scale = vScale < hScale ? vScale:hScale;
+			    if(scale > 2) scale = 2;
+			    $(".page1").css({
+			    	"zoom":scale
+			    });
+			};
+			reset();
+			$(window).resize(reset());
+			$(window).load(function(){
+				$(".animated").addClass("zoomInDown")
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				background: #333;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" style="display: block;border: 1px solid #3366FF;margin: 0 auto;">
+			不支持
+		</canvas>
+		<script>
+			var canvas = document.getElementById('canvas');
+			var context =canvas.getContext('2d');
+			var slider = document.getElementById('scale-range');
+			var image = new Image();
+			window.onload = function(){
+				canvas.width = 1280;
+				canvas.height = 800;
+				image.src = '../img/wallpaper-151243.jpg';
+				image.onload = function(){
+					context.drawImage(image,0,0)
+				}
+			}
+			canvas.onmousedown = function(e){
+				e.preventDefault();
+				console.log(e.clientX,e.clientY)
+			}
+		</script>
+	</body>
+	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<title></title>
+		<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#box {
+				width: 200px;
+				height: 200px;
+				background: brown;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="box">
+
+		</div>
+
+		<script>
+			$(function() {
+				$("#box").mousedown(function(e) {
+					var m_old_top = e.pageY; //获得鼠标初始坐标
+					var m_old_left = e.pageX;
+					var div_old_top = $("#box").position().top; //获得div初始位置
+					var div_old_left = $("#box").position().left;
+					var max_top = $(window).height() - $("#box").height(); //计算最大移动距离
+					var max_left = $(window).width() - $("#box").width();
+					$(document).bind("mousemove", function(e) {
+						var m_new_left = e.pageX; //获取最新鼠标坐标
+						var m_new_top = e.pageY;
+						var diff_x = m_new_left - m_old_left; //获取鼠标坐标变换距离
+						var diff_y = m_new_top - m_old_top
+						var div_new_left = div_old_left + diff_x; //得到div的移动距离
+						var div_new_top = div_old_top + diff_y;
+						if (div_new_left < 0) {
+							div_new_left = 0;
+						}
+						if (div_new_left > max_left) {
+							div_new_left = max_left;
+						}
+						if (div_new_top < 0) {
+							div_new_top = 0;
+						}
+						if (div_new_top > max_top) {
+							div_new_top = max_top;
+						}
+						$("#box").css({
+							"left": div_new_left + "px",
+							"top": div_new_top + "px"
+						})
+					})
+				})
+				$("#box").mouseup(function(e) {
+					$(document).unbind("mousemove");
+				})
+				
+				
+				
+				$("#box").on("mousewheel", function() {
+					zoomImg(this);
+					return false;
+				});
+
+				function zoomImg(o) {
+					$("#box").css("max-width", "");
+					var zoom = parseInt(o.style.zoom, 10) || 100;
+					zoom += event.wheelDelta / 12;
+					if (zoom > 0)
+						o.style.zoom = zoom + '%';
+				}
+			});
+		</script>
+	</body>
+
+</html>
