@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				background: #333;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvasa" style="">
+			不支持
+		</canvas>
+		
+		<canvas id="canvasb" style=""></canvas>
+		<script>
+			var canvasa = document.getElementById('canvasa');
+			var context =canvas.getContext('2d');
+			
+			var canvasb = document.getElementById('canvasb');
+			var offContext = offCanvas.getContext('2d');
+			
+			
+			var image = new Image();
+			window.onload = function(){
+				canvas.width = 681;
+				canvas.height = 383;
+				image.src = '../img/1.png';
+				image.onload = function(){
+					
+					offCanvas.width = image.width;
+					offCanvas.height = image.height;
+					
+					
+					//scale得到原图和展示图的比例倍数
+					scale = offCanvas.width / canvas.width;
+					
+					context.drawImage(image,0,0,canvas.width,canvas.height);
+					offContext.drawImage(image,0,0)//把原图绘制到隐藏的canvas中
+				}
+			}
+			
+		</script>
+	</body>
+	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
