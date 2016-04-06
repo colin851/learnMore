@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+		<link rel="stylesheet" href="../css/reset.css" />
+		<script type="text/javascript" src="../js/jquery.js" ></script>
+		<title></title>
+		<style>
+			.btn{
+				display: block;
+				width: 80px;
+				height: 80px;
+				line-height:80px;
+				text-align: center;
+				background: #f8a04b;
+				color: white;
+			}
+			.active{
+				background: #f38c28!important;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<a class="btn">按钮</a>
+		
+		<script>
+		var start;
+		var end;
+		var flag = 1;
+		$('.btn').on('mousedown',function(){
+			start = new Date * 1;
+			flag = 1;
+			console.log(start)
+			$('.btn').addClass('active')
+		})
+		$('.btn').on('touchmove',function(){
+			flag = 0;
+		})
+		$('.btn').on('mouseup',function(){
+			end = new Date * 1;
+			console.log(end)
+			setTimeout(function(){
+				$('.btn').removeClass('active')
+			},100)
+			
+		})	
+		var string1 = 'linhuadong';
+		string1 = string1.match(/../g);
+		console.log(string1);
+			
+		</script>
+	</body>
+</html>
