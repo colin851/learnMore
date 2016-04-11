@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+		<link rel="stylesheet" href="../css/reset.css" />
+		<title></title>
+		<style>
+			.pageview {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				-webkit-transition: 0.4s ease-out -webkit-transform;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<body>
+			<div class="pageview" style="background: #3b76c0" id="-main-view">
+				<h3>首页</h3>
+				<div title="-list-view" class="right-arrow"></div>
+			</div>
+			<div class="pageview" style="background: #58c03b;display: none" id="-list-view">
+				<h3>列表页面</h3>
+				<div class="left-arrow"></div>
+				<div title="-detail-view" class="right-arrow"></div>
+			</div>
+			<div class="pageview" style="background: #c03b25;display: none" id="-detail-view">
+				<h3>列表详情页面</h3>
+				<div class="left-arrow"></div>
+			</div>
+
+			<script>
+				//页面向左平移
+				var currentViewStart = "translateX(0%)", //currentView初始位置
+					applyViewStart = "translateX(100%)", //applyView初始位置
+					currentViewEnd = "translateX(-100%)", //currentView的最终位置
+					applyViewEnd = "translateX(0%)"; //applyView最终位置
+				//页面向右平移
+				if (direction == "right") {
+					currentViewStart = "translateX(0%)";
+					applyViewStart = "translateX(-100%)";
+					currentViewEnd = "translateX(100%)";
+					applyViewEnd = "translateX(0%)"
+				}
+				//初始化执行
+				initViewPool: function() {
+						var views = document.querySelectorAll(".pageview");
+						//通过call使用数组的forEach来遍历NodeList
+						Array.prototype.forEach.call(views, function(item) {
+							//viewPool是一个全局对象
+							viewPool[item.id] = item; //将DOM的id作为键
+						});
+					}
+					//获取当前页面的DOM对象
+				var currentView = viewPool[currentViewId];
+				//获取新页面的DOM对象
+				var applyView = viewPool[pageId];
+				//设置新页面的初始位置
+				applyView.style.webkitTransform = applyViewStart;
+				//设置当前页面的初始位置
+				currentView.style.webkitTransform = currentViewStart;
+				//设置新页面显示
+				applyView.style.display = "";
+				var t1 = setTimeout(function() {
+					//当设置最终位置时，页面就会以过渡效果平移到最终位置
+					applyView.style.webkitTransform = applyViewEnd;
+					currentView.style.webkitTransform = currentViewEnd;
+				}, 200);
+				var t2 = setTimeout(function() {
+					//400ms后，页面平移结束，设置currentView为隐藏
+					currentView.style.display = "none";
+					//将新页面设置为当前页面
+					currentViewId = pageId;
+					if (direction === 'left') {
+						window.location.hash = currentViewId.substring(1);
+					}
+					window.clearTimeout(t1);
+					window.clearTimeout(t2);
+				}, 600);
+				if (direction === 'left') {
+					//当进入到新页面时，设置当前hash的值为当前页面的id
+					window.location.hash = currentViewId.substring(1);
+				}
+				var that = this;
+				window.addEventListener("hashchange", function() {
+					//当点击返回键时，hash会回退到上一页的hash值
+					//获取上一页的hash值，并转化为对应view的id
+					var id = window.location.hash.replace("#", "-");
+					// 判断当前页面不是首页，
+					// 并且触发的浏览器的`back`操作，即点击返回键，因为页面前进的时候也会发生hash变化
+					if (currentViewId != "-main-view" && id != currentViewId) {
+						id = id || "-main-view"; //如果上一页是首页，则hash为空，这时需要补上对应的id
+						//调用forward方法从当前页面切换到上一页
+						that.forward(id, "right");
+					}
+				}, false);
+			</script>
+		</body>
+
+</html>
